@@ -39,7 +39,7 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req, res) {
-  res.render('index', {error: false, length: false});
+  res.render('index', {error: false, length: false, nav: 'home'});
 });
 
 //Someone submits a new quote.
@@ -47,11 +47,11 @@ app.post('/', function(req, res) {
 
   //Checks if there's an actual quote and author.
   if(!req.body.quote || !req.body.author){
-    res.render('index', {error: true, length: false});
+    res.render('index', {error: true, length: false, nav: 'home'});
 
   //Checks if it does not pass the character limit. 
   } else if(req.body.quote.length >= 500 || req.body.author.length >= 50){
-    res.render('index', {error: false, length: true});
+    res.render('index', {error: false, length: true, nav: 'home'});
 
   } else{
 
@@ -59,7 +59,7 @@ app.post('/', function(req, res) {
     Kwoter.findOne({quote: req.body.quote, author: req.body.author}).exec(function(err, result) {
       if(err){
         console.log('Error: ' + err);
-        res.render('index', {error: true, length: true});
+        res.render('index', {error: true, length: true, nav: 'home'});
 
       } else{
 
@@ -86,7 +86,7 @@ app.post('/', function(req, res) {
           newQuote.save(function(err) {
             if(err){
               console.log('Error: ' + err);
-              res.render('index', {error: true, length: false});
+              res.render('index', {error: true, length: false, nav: 'home'});
             } else{
               res.redirect('/q/'+quoteURL);
             }
@@ -100,17 +100,17 @@ app.post('/', function(req, res) {
 
 app.get('/q/:id', function(req, res) {
   if(!req.params.id){
-      res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: ''});
+      res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: '', nav: 'quote'});
   } else{
     Kwoter.findOne({url: req.params.id}).exec(function(err, result) {
       if(err){
         console.log('Error: ' + err);
-        res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: ''});
+        res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: '', nav: 'quote'});
       } else{
         if(!result){
-          res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: ''});
+          res.render('quote', {exist: false, url: '', quote: '', author: '', host: req.host, source: '', nav: 'quote'});
         } else{
-          res.render('quote', {exist: true, url: result.url, quote: result.quote, author: result.author, host: req.host, source: result.source});
+          res.render('quote', {exist: true, url: result.url, quote: result.quote, author: result.author, host: req.host, source: result.source, nav: 'quote'});
         }
       }
     });
@@ -119,7 +119,7 @@ app.get('/q/:id', function(req, res) {
 });
 
 app.get('/about', function(req, res) {
-  res.render('about');
+  res.render('about', {nav: 'about'});
 });
 
 http.createServer(app).listen(app.get('port'), function(){

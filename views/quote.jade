@@ -1,6 +1,7 @@
 extends layout
 
 block content
+        div#fb-root
         div.offset1
             if (exist)
                 blockquote
@@ -12,9 +13,14 @@ block content
                             cite(title='Source Title') #{source}
 
                 p Share this quote with your friends
-                input(type='text', value='#{host}/q/#{url}', onclick='this.select()')
-
-                ul.inline
+                input.input-xlarge(type='text', value='#{host}/q/#{url}', onclick='this.select()')
+                style
+                    ul.inline li{
+                    height: 25px;
+                    vertical-align:middle;
+                    padding-left:0px;
+                    }
+                ul.inline.social
                     li.social
                         div.g-plusone(data-size='medium')
                         script
@@ -24,6 +30,17 @@ block content
                         a(href="https://twitter.com/share", class="twitter-share-button") Tweet
                         script
                             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+                    li.social
+                        script
+                            (function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                              fjs.parentNode.insertBefore(js, fjs);
+                              }(document, 'script', 'facebook-jssdk'));
+                        div.fb-like(data-send="false", data-width="100", data-show-faces="false", data-layout="button_count")
 
             if (!exist)
                 p.lead The quote you are trying to reach does not exist.

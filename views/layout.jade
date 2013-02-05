@@ -8,12 +8,21 @@ html
         div.header
             div.masthead
                 ul.nav.nav-pills.pull-right
-                    li
-                        a(href='/') Home
-                    li
-                        a(href='/about') About
-
-            h1 Kwoter
+                    - if (nav === 'home')
+                        li.active
+                            a(href='/') Home
+                    - else
+                        li
+                            a(href='/') Home
+                                    
+                    - if (nav === 'about')
+                        li.active
+                            a(href='/about') About
+                    - else
+                        li
+                            a(href="/about") About
+            h1 Kwoter 
+                small.muted Share quotes with your friends
 
         hr
         block content
