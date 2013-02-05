@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: Helvetica, Arial, sans-serif;
+  font-size: large;
+}
+
+p,h1,form,button{
+    border:0;
+    margin:0;
+    padding:0;
+}
+
+.quoteForm{
+    margin: 0 auto;
+    width: 400px;
+    padding: 14px;
+}
+
+span, label, textarea, input, button{
+    display: block;
+}
+
+span{
+    font-size:medium;
+}

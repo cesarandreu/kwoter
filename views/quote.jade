@@ -1,0 +1,16 @@
+extends layout
+
+block content
+        div.offset1
+            if (exist)
+                blockquote
+                    p.lead #{quote}
+                    small #{author}
+
+                p Share this quote with your friends
+                input(type='text', value='#{host}/q/#{url}')
+
+            if (!exist)
+                p.lead The quote you are trying to reach does not exist.
+
+

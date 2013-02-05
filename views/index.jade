@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    div.body
+        form.form-horizontal(method='POST', action='/')
+            div.control-group
+                label.control-label.lead(for='quote') Quote
+                div.controls
+                    textarea.span8(rows='4', required, name='quote', maxlength='500')
+                    span.help-block Maximum of 500 characters
+
+            div.control-group
+                label.control-label.lead(for='author') Author
+                div.controls
+                    input.span8(type="text", required, name='author', maxlength='50')
+                    span.help-block Maximum of 100 characters
+            div.control-group
+                div.controls
+                    button.btn.btn-primary(type="submit") Submit
+    if (error)
+        p There was an error, please try again.
+    if (length)
+        p You exceeded the allowed length. Please try again.
+
