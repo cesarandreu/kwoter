@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , http = require('http')
-  , path = require('path')
-  , mongoose = require('mongoose')
-  , shortId = require('shortid');
+var express = require('express'),
+    http = require('http'),
+    path = require('path')
+    mongoose = require('mongoose'),
+    shortId = require('shortid');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon(__dirname + '/public/images/favicon.ico'));
+  app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -50,7 +50,7 @@ app.post('/', function(req, res) {
     res.render('index', {error: true, length: false, nav: 'home'});
 
   //Checks if it does not pass the character limit. 
-  } else if(req.body.quote.length >= 500 || req.body.author.length >= 50){
+  } else if(req.body.quote.length > 2000 || req.body.author.length > 100){
     res.render('index', {error: false, length: true, nav: 'home'});
 
   } else{
@@ -121,6 +121,39 @@ app.get('/q/:id', function(req, res) {
 app.get('/about', function(req, res) {
   res.render('about', {nav: 'about'});
 });
+
+app.get('/guide.json', function(req, res) {
+  res.json({
+    success: true,
+    result: [
+      {
+        selector: '#quote',
+        title: 'Quote',
+        content: 'Type in the quote which you wish to share. The maximum length is 2000 characters.',
+        placement: 'bottom'
+      },
+      {
+        selector: '#author',
+        title: 'Author',
+        content: 'Type in the name of the quote\'s Author. The maximum length is 100 characters.',
+        placement: 'top'
+      },
+      {
+        selector: '#source',
+        title: 'Source',
+        content: 'Type in the quote\'s source. This field is optional. The maximum length is 150 characters.',
+        placement: 'top'
+      },
+      {
+        selector: '#submit',
+        title: 'Submit',
+        content: 'Now submit your quote! You will be redirected to the quote\'s page upon submitting.',
+        placement: 'right'
+      }
+    ]
+  });
+});
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

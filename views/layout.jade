@@ -2,7 +2,13 @@ doctype 5
 html
   head
     title Kwoter
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel="stylesheet", href="/css/bootstro.min.css")
+    block styles
+    script(src="/js/jquery-2.0.2.min.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="/js/bootstro.min.js")
+    block scripts
   body
     div.container
         div.header
@@ -23,6 +29,6 @@ html
                             a(href="/about") About
             h1 Kwoter 
                 small.muted Share quotes with your friends
-
+                block header
         hr
         block content

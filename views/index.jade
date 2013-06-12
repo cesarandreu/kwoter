@@ -1,28 +1,43 @@
 extends layout
 
+block scripts
+    script(src="/js/bootstroStart.js")
+
+block styles
+    style.
+        .padLeft{
+            margin-left: 20px;
+        }
+
+block header
+    button.btn.btn-primary.padLeft(onclick="bootstroStart()") Quick guide    
+
 block content
     div.body
+
         form.form-horizontal(method='POST', action='/')
             div.control-group
                 label.control-label.lead(for='quote') Quote
                 div.controls
-                    textarea.span8(rows='4', required, name='quote', maxlength='500')
-                    span.help-block Maximum of 500 characters
+                    textarea.span8#quote(rows='4', required, name='quote', maxlength='500')
+                    span.help-block Maximum of 2000 characters
 
             div.control-group
                 label.control-label.lead(for='author') Author
                 div.controls
-                    input.span8(type="text", required, name='author', maxlength='50')
-                    span.help-block Maximum of 50 characters
+                    input.span8#author(type="text", required, name='author', maxlength='50')
+                    span.help-block Maximum of 100 characters
+
             div.control-group
                 label.control-label.lead(for='Source') Source
                 div.controls
-                    input.span8(type='text', name='source', maxlength='100')
-                    span.help-block Maximum of 100 characters
+                    input.span8#source(type='text', name='source', maxlength='100')
+                    span.help-block Maximum of 150 characters
                     span.help-block This field is optional
+
             div.control-group
                 div.controls
-                    button.btn.btn-primary(type="submit") Submit
+                    button.btn.btn-primary#submit(type="submit") Submit
     if (error)
         p There was an error, please try again.
     if (length)
