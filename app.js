@@ -5,7 +5,7 @@
 
 var express = require('express'),
     http = require('http'),
-    path = require('path')
+    path = require('path'),
     mongoose = require('mongoose'),
     shortId = require('shortid');
 
